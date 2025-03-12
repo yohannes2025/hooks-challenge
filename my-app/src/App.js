@@ -1,13 +1,13 @@
-import css from './App.module.css';
-import Sidebar from "./components/Sidebar";
+import React from "react";
+import ContentHooks from "./ContentHooks"; // Adjust the import path as necessary
 
-function App() {
+const App = () => {
   return (
-    <div className={css.App}>
-      {/* Add your components here */}
-      <Sidebar />
+    <div>
+      <h1>My Gallery</h1>
+      <ContentHooks />
     </div>
   );
-}
+};
 
 export default App;
