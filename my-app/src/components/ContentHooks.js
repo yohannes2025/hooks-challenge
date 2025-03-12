@@ -1,53 +1,50 @@
-// ContentHooks.js
-
 import React, { useState, useEffect } from "react";
+import css from "./css/Content.module.css";
+import { savedPosts } from "../posts.json";
 import PostItem from "./PostItem";
 import Loader from "./Loader";
-import posts from "./posts.json";
-import styles from "./Content.module.css";
 
-
-const ContentHooks = () => {
-  // Use State
-  const [fetchedPosts, setFetchedPosts] = useState([]);
+function ContentHooks() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [fetchedPosts, setFetchedPosts] = useState([]);
 
-  // Use Effect
   useEffect(() => {
-    // Simulate fetching data from an API
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       setIsLoaded(true);
-      setFetchedPosts(posts);
+      setFetchedPosts(savedPosts);
     }, 2000);
-
-    // Clean up the timer when the component is unmounted
-    return () => clearTimeout(timer);
   }, []);
 
-  // Handle Change
-  const handleChange = (event) => {
-    const filteredPosts = posts.filter((post) =>
-      post.title.toLowerCase().includes(event.target.value.toLowerCase())
-    );
+  const handleChange = (e) => {
+    const name = e.target.value.toLowerCase();
+    const filteredPosts = savedPosts.filter((post) => {
+      return post.name.toLowerCase().includes(name);
+    });
+
     setFetchedPosts(filteredPosts);
   };
 
   return (
-    <div className={styles.content}>
-      <div className={styles.searchContainer}>
-        <input
-          type="text"
-          placeholder="Search posts..."
-          onChange={handleChange}
-        />
+    <div className={css.Content}>
+      <div className={css.TitleBar}>
+        <h1>My Photos</h1>
+        <form>
+          <label htmlFor="searchinput">Search</label>
+          <input
+            type="search"
+            id="searchinput"
+            onChange={(e) => {
+              handleChange(e);
+            }}
+          />
+          <h4>Posts Found: {fetchedPosts.length}</h4>
+        </form>
       </div>
-      {isLoaded ? (
-        fetchedPosts.map((post) => <PostItem key={post.id} post={post} />)
-      ) : (
-        <Loader />
-      )}
+      <div className={css.SearchResults}>
+        {isLoaded ? <PostItem savedPosts={fetchedPosts} /> : <Loader />}
+      </div>
     </div>
   );
-};
+}
 
 export default ContentHooks;
