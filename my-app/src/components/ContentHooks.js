@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import PostItem from "./PostItem";
 import Loader from "./Loader";
 import posts from "./posts.json";
-import styles from "../Content.module.css";
+import styles from "./Content.module.css";
 
 
 const ContentHooks = () => {
