@@ -3,6 +3,8 @@ import css from "./css/Content.module.css";
 import { savedPosts } from "../posts.json";
 import PostItem from "./PostItem";
 import Loader from "./Loader";
+import styles from "./css/Content.module.css";
+
 
 function ContentHooks() {
   const [isLoaded, setIsLoaded] = useState(false);
