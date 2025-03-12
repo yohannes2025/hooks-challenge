@@ -1,5 +1,7 @@
 import React from "react";
-import ContentHooks from "./ContentHooks"; // Adjust the import path as necessary
+import ContentHooks from "./components/ContentHooks";
+
+
 
 const App = () => {
   return (
